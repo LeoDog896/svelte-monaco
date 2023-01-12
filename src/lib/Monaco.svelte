@@ -36,11 +36,16 @@
                 }
             }
         };
-        monaco.editor.create(container, {
+        
+        const editor = monaco.editor.create(container, {
             value,
             language,
             automaticLayout: true
         });
+
+        return () => {
+			editor.dispose();
+		};
     })
 </script>
 
