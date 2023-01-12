@@ -7,7 +7,19 @@
 	export let language: string;
 	export let value: string;
 
-    $: editor?.setValue(value);
+    export let options: monaco.editor.IStandaloneEditorConstructionOptions = {
+        value,
+        language,
+        automaticLayout: true
+    }
+
+    $: editor?.updateOptions(options);
+
+    $: if (editor && editor.getValue() != value) {
+        const position = editor.getPosition();
+        editor.setValue(value);
+        if (position) editor.setPosition(position);
+    }
     
 	onMount(() => {
 		(globalThis as any).MonacoEnvironment = {
@@ -41,11 +53,7 @@
 			}
 		};
 
-		editor = monaco.editor.create(container, {
-			value,
-			language,
-			automaticLayout: true
-		});
+		editor = monaco.editor.create(container, options);
 
         editor.getModel()!.onDidChangeContent((event) => {
             value = editor.getValue();
