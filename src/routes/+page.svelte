@@ -6,7 +6,7 @@
 </script>
 
 <div id="editor">
-	<Monaco language="typescript" bind:value />
+	<Monaco options={{language: "typescript"}} bind:value />
 </div>
 
 <textarea bind:value />

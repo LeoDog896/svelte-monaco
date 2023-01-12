@@ -3,13 +3,11 @@
 	import { onMount } from 'svelte';
 
 	let container: HTMLDivElement;
-    export let editor: monaco.editor.IStandaloneCodeEditor;
-	export let language: string;
+    export let editor: monaco.editor.IStandaloneCodeEditor | undefined = undefined;
 	export let value: string;
 
     export let options: monaco.editor.IStandaloneEditorConstructionOptions = {
         value,
-        language,
         automaticLayout: true
     }
 
@@ -56,11 +54,12 @@
 		editor = monaco.editor.create(container, options);
 
         editor.getModel()!.onDidChangeContent((event) => {
+            if (!editor) return;
             value = editor.getValue();
         });
 
 		return () => {
-			editor.dispose();
+			editor?.dispose();
 		};
 	});
 </script>
