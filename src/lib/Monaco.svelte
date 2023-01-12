@@ -1,6 +1,7 @@
 <script lang="ts">
 	import * as monaco from 'monaco-editor';
 	import { onMount } from 'svelte';
+    
     let container: HTMLDivElement;
     export let language: string;
     export let value: string;
@@ -37,16 +38,19 @@
         };
         monaco.editor.create(container, {
             value,
-            language
+            language,
+            automaticLayout: true
         });
     })
 </script>
 
-<div bind:this={container}></div>
+<div id="monaco-container" bind:this={container}></div>
 
 <style>
-    div {
+    div#monaco-container {
         width: 100%;
         height: 100%;
+        padding: 0;
+        margin: 0;
     }
 </style>
