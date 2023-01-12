@@ -1,3 +1,3 @@
-import Monaco from "./Monaco.svelte"
+import Monaco from './Monaco.svelte';
 
 export default Monaco;
