@@ -3,8 +3,12 @@
 	import { onMount } from 'svelte';
 
 	let container: HTMLDivElement;
+    export let editor: monaco.editor.IStandaloneCodeEditor;
 	export let language: string;
 	export let value: string;
+
+    $: editor?.setValue(value);
+    
 	onMount(() => {
 		(globalThis as any).MonacoEnvironment = {
 			getWorker: function (workerId: any, label: any) {
@@ -37,11 +41,15 @@
 			}
 		};
 
-		const editor = monaco.editor.create(container, {
+		editor = monaco.editor.create(container, {
 			value,
 			language,
 			automaticLayout: true
 		});
+
+        editor.getModel()!.onDidChangeContent((event) => {
+            value = editor.getValue();
+        });
 
 		return () => {
 			editor.dispose();
