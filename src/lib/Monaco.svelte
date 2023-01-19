@@ -1,5 +1,5 @@
 <script lang="ts">
-	import * as monaco from 'monaco-editor';
+	import { editor as monacoEditor } from 'monaco-editor';
 	import { onMount } from 'svelte';
 	import { createEventDispatcher } from 'svelte';
 
@@ -11,14 +11,14 @@
 	import EditorURL from 'monaco-editor/esm/vs/editor/editor.worker?worker&url';
 
 	const dispatch = createEventDispatcher<{
-		ready: monaco.editor.IStandaloneCodeEditor;
+		ready: monacoEditor.IStandaloneCodeEditor;
 	}>();
 
 	let container: HTMLDivElement;
-	export let editor: monaco.editor.IStandaloneCodeEditor | undefined = undefined;
+	export let editor: monacoEditor.IStandaloneCodeEditor | undefined = undefined;
 	export let value: string;
 
-	export let options: monaco.editor.IStandaloneEditorConstructionOptions = {
+	export let options: monacoEditor.IStandaloneEditorConstructionOptions = {
 		value,
 		automaticLayout: true
 	};
@@ -60,7 +60,7 @@
 			}
 		};
 
-		editor = monaco.editor.create(container, options);
+		editor = monacoEditor.create(container, options);
 
 		dispatch('ready', editor);
 
