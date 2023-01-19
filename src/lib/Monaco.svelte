@@ -25,10 +25,10 @@
 	}
 
 	onMount(() => {
-		(globalThis as any).MonacoEnvironment = {
-			getWorker: function (workerId: any, label: any) {
-				const getWorkerModule = (moduleUrl: any, label: any) => {
-					return new Worker((globalThis as any).MonacoEnvironment.getWorkerUrl(moduleUrl), {
+		window.MonacoEnvironment = {
+			getWorker: function (_, label) {
+				const getWorkerModule = (moduleUrl: string, label: any) => {
+					return new Worker(window.MonacoEnvironment!.getWorkerUrl!(moduleUrl, label), {
 						name: label,
 						type: 'module'
 					});
