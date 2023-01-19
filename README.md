@@ -1,6 +1,18 @@
-# monaco-svelte
+# monaco-svelte (WIP & unpublished)
 
 reactive two-way monaco editor for svelte.
+
+```sh
+npm install --save-dev monaco-svelte
+```
+
+```sh
+pnpm install --save-dev monaco-svelte
+```
+
+```sh
+yarn add --save-dev moncao-svelte
+```
 
 ```html
 <script lang="ts">
