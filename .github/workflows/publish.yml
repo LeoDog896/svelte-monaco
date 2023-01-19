@@ -29,7 +29,7 @@ jobs:
       - name: Test Build
         run: |
           yarn install
-          yarn build
+          yarn build:web
   gh-release:
     if: github.event_name != 'pull_request'
     runs-on: ubuntu-latest
@@ -44,7 +44,7 @@ jobs:
       - name: Install Dependencies
         run: yarn install
       - name: Build Project
-        run: yarn build
+        run: yarn build:web
       - name: Setup Pages
         uses: actions/configure-pages@v2
       - name: Upload artifact
