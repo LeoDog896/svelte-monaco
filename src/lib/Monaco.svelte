@@ -3,6 +3,13 @@
 	import { onMount } from 'svelte';
 	import { createEventDispatcher } from 'svelte';
 
+	// monaco-editor worker importing
+	import TypescriptURL from 'monaco-editor/esm/vs/language/typescript/ts.worker?worker&url';
+	import HTMLURL from 'monaco-editor/esm/vs/language/html/html.worker?worker&url';
+	import CSSURL from 'monaco-editor/esm/vs/language/css/css.worker?worker&url';
+	import JSONURL from 'monaco-editor/esm/vs/language/json/json.worker?worker&url';
+	import EditorURL from 'monaco-editor/esm/vs/editor/editor.worker?worker&url';
+
 	const dispatch = createEventDispatcher<{
 		ready: monaco.editor.IStandaloneCodeEditor;
 	}>();
@@ -27,7 +34,7 @@
 	onMount(() => {
 		window.MonacoEnvironment = {
 			getWorker: function (_, label) {
-				const getWorkerModule = (moduleUrl: string, label: any) => {
+				const getWorkerModule = (moduleUrl: string, label: string) => {
 					return new Worker(window.MonacoEnvironment!.getWorkerUrl!(moduleUrl, label), {
 						name: label,
 						type: 'module'
@@ -35,23 +42,20 @@
 				};
 				switch (label) {
 					case 'json':
-						return getWorkerModule('/monaco-editor/esm/vs/language/json/json.worker?worker', label);
+						return getWorkerModule(JSONURL, label);
 					case 'css':
 					case 'scss':
 					case 'less':
-						return getWorkerModule('/monaco-editor/esm/vs/language/css/css.worker?worker', label);
+						return getWorkerModule(CSSURL, label);
 					case 'html':
 					case 'handlebars':
 					case 'razor':
-						return getWorkerModule('/monaco-editor/esm/vs/language/html/html.worker?worker', label);
+						return getWorkerModule(HTMLURL, label);
 					case 'typescript':
 					case 'javascript':
-						return getWorkerModule(
-							'/monaco-editor/esm/vs/language/typescript/ts.worker?worker',
-							label
-						);
+						return getWorkerModule(TypescriptURL, label);
 					default:
-						return getWorkerModule('/monaco-editor/esm/vs/editor/editor.worker?worker', label);
+						return getWorkerModule(EditorURL, label);
 				}
 			}
 		};
