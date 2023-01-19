@@ -1,24 +1,29 @@
 <script lang="ts">
 	import * as monaco from 'monaco-editor';
 	import { onMount } from 'svelte';
+	import { createEventDispatcher } from 'svelte';
+
+	const dispatch = createEventDispatcher<{
+		ready: monaco.editor.IStandaloneCodeEditor;
+	}>();
 
 	let container: HTMLDivElement;
-    export let editor: monaco.editor.IStandaloneCodeEditor | undefined = undefined;
+	export let editor: monaco.editor.IStandaloneCodeEditor | undefined = undefined;
 	export let value: string;
 
-    export let options: monaco.editor.IStandaloneEditorConstructionOptions = {
-        value,
-        automaticLayout: true
-    }
+	export let options: monaco.editor.IStandaloneEditorConstructionOptions = {
+		value,
+		automaticLayout: true
+	};
 
-    $: editor?.updateOptions(options);
+	$: editor?.updateOptions(options);
 
-    $: if (editor && editor.getValue() != value) {
-        const position = editor.getPosition();
-        editor.setValue(value);
-        if (position) editor.setPosition(position);
-    }
-    
+	$: if (editor && editor.getValue() != value) {
+		const position = editor.getPosition();
+		editor.setValue(value);
+		if (position) editor.setPosition(position);
+	}
+
 	onMount(() => {
 		(globalThis as any).MonacoEnvironment = {
 			getWorker: function (workerId: any, label: any) {
@@ -53,10 +58,12 @@
 
 		editor = monaco.editor.create(container, options);
 
-        editor.getModel()!.onDidChangeContent((event) => {
-            if (!editor) return;
-            value = editor.getValue();
-        });
+		dispatch('ready', editor);
+
+		editor.getModel()!.onDidChangeContent(() => {
+			if (!editor) return;
+			value = editor.getValue();
+		});
 
 		return () => {
 			editor?.dispose();

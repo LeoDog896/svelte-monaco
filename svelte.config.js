@@ -10,7 +10,7 @@ const config = {
 	kit: {
 		adapter: adapter(),
 		paths: {
-			base: "/monaco-svelte"
+			base: '/monaco-svelte'
 		}
 	}
 };
