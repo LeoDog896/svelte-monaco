@@ -1,16 +1,41 @@
 {
 	"name": "monaco-svelte",
+	"description": "Monaco Editor bindings for Svelte",
 	"version": "0.0.1",
 	"scripts": {
 		"dev": "vite dev",
-		"build:web": "vite build",
-		"build": "svelte-kit sync && svelte-package",
-		"prepublishOnly": "echo 'Did you mean to publish `./package/`, instead of `./`?' && exit 1",
+		"build": "vite build",
+		"package": "svelte-kit sync && svelte-package && publint",
+		"preview": "vite preview",
+		"prepublishOnly": "npm run package",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
 		"lint": "prettier --plugin-search-dir . --check . && eslint .",
 		"format": "prettier --plugin-search-dir . --write ."
 	},
+	"author": {
+		"name": "Tristan F.",
+		"email": "leodog896@gmail.com"
+	},
+	"repository": "github:LeoDog896/monaco-svelte",
+	"homepage": "https://leodog896.github.io/monaco-svelte",
+	"bugs": {
+		"url": "https://github.com/LeoDog896/monaco-svelte/issues",
+		"email": "leodog896@gmail.com"
+	},
+	"exports": {
+		".": {
+			"types": "./dist/index.d.ts",
+			"svelte": "./dist/index.js"
+		}
+	},
+	"files": [
+		"dist",
+		"!dist/**/*.test.*",
+		"!dist/**/*.spec.*"
+	],
+	"svelte": "./dist/index.js",
+	"types": "./dist/index.d.ts",
 	"devDependencies": {
 		"@sveltejs/adapter-auto": "^2.1.0",
 		"@sveltejs/adapter-static": "^2.0.2",
@@ -21,8 +46,10 @@
 		"eslint": "^8.45.0",
 		"eslint-config-prettier": "^8.8.0",
 		"eslint-plugin-svelte3": "^4.0.0",
-		"prettier": "^3.0.0",
-		"prettier-plugin-svelte": "^3.0.0",
+		"monaco-editor": "^0.40.0",
+		"prettier": "^2.8.0",
+		"prettier-plugin-svelte": "^2.10.1",
+		"publint": "^0.1.16",
 		"svelte": "^4.1.1",
 		"svelte-check": "^3.4.6",
 		"tslib": "^2.6.1",
@@ -30,7 +57,8 @@
 		"vite": "^4.4.7"
 	},
 	"type": "module",
-	"dependencies": {
-		"monaco-editor": "^0.40.0"
+	"dependencies": {},
+	"peerDependencies": {
+		"svelte": ">=4.0.0"
 	}
 }

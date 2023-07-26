@@ -76,7 +76,7 @@
 
 	onDestroy(() => {
 		editor?.dispose();
-	})
+	});
 </script>
 
 <div id="monaco-container" bind:this={container} />
