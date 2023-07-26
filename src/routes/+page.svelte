@@ -3,11 +3,15 @@
 	import Monaco from '$lib/index';
 
 	let value = 'const x = 5';
+	let readOnly = false;
 </script>
 
 <div id="editor">
 	<Monaco
-		options={{ language: 'typescript' }}
+		options={{ 
+			language: 'typescript',
+			readOnly,
+		}}
 		bind:value
 		on:ready={(editor) => {
 			editor.detail.addAction({
@@ -32,6 +36,15 @@
 </div>
 
 <textarea bind:value />
+
+<hr />
+
+<!-- readonly checkbox -->
+<label>
+	<input type="checkbox" bind:checked={readOnly} />
+	readonly
+</label>
+
 
 <style>
 	div#editor {

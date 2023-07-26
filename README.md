@@ -1,4 +1,4 @@
-# svelte-monaco (WIP & unpublished)
+# svelte-monaco
 
 reactive two-way monaco editor for svelte.
 
@@ -14,7 +14,7 @@ pnpm install --save-dev svelte-monaco
 yarn add --save-dev moncao-svelte
 ```
 
-```html
+```svelte
 <script lang="ts">
 	import Monaco from 'svelte-monaco';
 
@@ -22,8 +22,7 @@ yarn add --save-dev moncao-svelte
 </script>
 
 <div id="editor">
-	<Monaco options={{language: "typescript"}} on:ready={event => console.log(event.detail)}
-	bind:value />
+	<Monaco options={{language: "typescript"}} on:ready={event => console.log(event.detail)} bind:value />
 </div>
 
 <textarea bind:value />
