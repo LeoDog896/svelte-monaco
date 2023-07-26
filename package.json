@@ -1,5 +1,5 @@
 {
-	"name": "monaco-svelte",
+	"name": "svelte-monaco",
 	"description": "Monaco Editor bindings for Svelte",
 	"version": "0.0.1",
 	"scripts": {
@@ -17,10 +17,10 @@
 		"name": "Tristan F.",
 		"email": "leodog896@gmail.com"
 	},
-	"repository": "github:LeoDog896/monaco-svelte",
-	"homepage": "https://leodog896.github.io/monaco-svelte",
+	"repository": "github:LeoDog896/svelte-monaco",
+	"homepage": "https://leodog896.github.io/svelte-monaco",
 	"bugs": {
-		"url": "https://github.com/LeoDog896/monaco-svelte/issues",
+		"url": "https://github.com/LeoDog896/svelte-monaco/issues",
 		"email": "leodog896@gmail.com"
 	},
 	"exports": {

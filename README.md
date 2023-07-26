@@ -1,13 +1,13 @@
-# monaco-svelte (WIP & unpublished)
+# svelte-monaco (WIP & unpublished)
 
 reactive two-way monaco editor for svelte.
 
 ```sh
-npm install --save-dev monaco-svelte
+npm install --save-dev svelte-monaco
 ```
 
 ```sh
-pnpm install --save-dev monaco-svelte
+pnpm install --save-dev svelte-monaco
 ```
 
 ```sh
@@ -16,7 +16,7 @@ yarn add --save-dev moncao-svelte
 
 ```html
 <script lang="ts">
-	import Monaco from 'monaco-svelte';
+	import Monaco from 'svelte-monaco';
 
 	let value = 'const x = 5';
 </script>
