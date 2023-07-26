@@ -1,6 +1,6 @@
 <script lang="ts">
-	import { editor as monacoEditor } from 'monaco-editor';
-	import { onMount } from 'svelte';
+	import type monaco from 'monaco-editor';
+	import { onDestroy, onMount } from 'svelte';
 	import { createEventDispatcher } from 'svelte';
 
 	// monaco-editor worker importing
@@ -10,15 +10,17 @@
 	import JSONURL from 'monaco-editor/esm/vs/language/json/json.worker?worker&url';
 	import EditorURL from 'monaco-editor/esm/vs/editor/editor.worker?worker&url';
 
+	let Monaco: typeof monaco;
+
 	const dispatch = createEventDispatcher<{
-		ready: monacoEditor.IStandaloneCodeEditor;
+		ready: monaco.editor.IStandaloneCodeEditor;
 	}>();
 
 	let container: HTMLDivElement;
-	export let editor: monacoEditor.IStandaloneCodeEditor | undefined = undefined;
+	export let editor: monaco.editor.IStandaloneCodeEditor | undefined = undefined;
 	export let value: string;
 
-	export let options: monacoEditor.IStandaloneEditorConstructionOptions = {
+	export let options: monaco.editor.IStandaloneEditorConstructionOptions = {
 		value,
 		automaticLayout: true
 	};
@@ -31,7 +33,7 @@
 		if (position) editor.setPosition(position);
 	}
 
-	onMount(() => {
+	onMount(async () => {
 		window.MonacoEnvironment = {
 			getWorker: function (_, label) {
 				const getWorkerModule = (moduleUrl: string, label: string) => {
@@ -60,7 +62,9 @@
 			}
 		};
 
-		editor = monacoEditor.create(container, options);
+		Monaco = await import('monaco-editor');
+
+		editor = Monaco.editor.create(container, options);
 
 		dispatch('ready', editor);
 
@@ -68,11 +72,11 @@
 			if (!editor) return;
 			value = editor.getValue();
 		});
-
-		return () => {
-			editor?.dispose();
-		};
 	});
+
+	onDestroy(() => {
+		editor?.dispose();
+	})
 </script>
 
 <div id="monaco-container" bind:this={container} />
