@@ -1,15 +1,17 @@
-<script lang="ts">
-	import type Monaco from 'monaco-editor';
-	import { onDestroy, onMount } from 'svelte';
-	import { createEventDispatcher } from 'svelte';
-	import loader from '@monaco-editor/loader';
-
-	const themes = Object.fromEntries(
+<script context="module" lang="ts">
+	export const themes = Object.fromEntries(
 		Object.entries(import.meta.glob('/node_modules/monaco-themes/themes/*.json')).map(([k, v]) => [
 			k.toLowerCase().split('/').reverse()[0].slice(0, -'.json'.length).replaceAll(" ", "-"),
 			v
 		])
 	);
+</script>
+
+<script lang="ts">
+	import type Monaco from 'monaco-editor';
+	import { onDestroy, onMount } from 'svelte';
+	import { createEventDispatcher } from 'svelte';
+	import loader from '@monaco-editor/loader';
 
 	let monaco: typeof Monaco;
 

@@ -1,10 +1,17 @@
 <script lang="ts">
 	import './style.css';
-	import Monaco from '$lib/index';
+	import Monaco, { themes } from '$lib/index';
 
 	let value = 'const x = 5';
 	let readOnly = false;
 	let theme = 'github-light';
+
+	function selectTheme(themeSelection: string) {
+		return () => {
+			theme = themeSelection;
+			window.scrollTo(0, 0);
+		};
+	}
 </script>
 
 <main>
@@ -54,6 +61,13 @@
 	<br />
 
 	<p>Theme: <input type="text" bind:value={theme} /> </p>
+
+	<p>Available themes:</p>
+	<ul>
+		{#each Object.keys(themes) as theme}
+			<li><button on:click={selectTheme(theme)}>{theme}</button></li>
+		{/each}
+	</ul>
 </main>
 <style>
 	div#editor {
