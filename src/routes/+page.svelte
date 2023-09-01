@@ -4,14 +4,19 @@
 
 	let value = 'const x = 5';
 	let readOnly = false;
+	let theme = 'monokai';
 </script>
+
+<h1>svelte-monaco</h1>
+<h2>monaco bindings for svelte(&kit)</h2>
 
 <div id="editor">
 	<Monaco
-		options={{ 
+		options={{
 			language: 'typescript',
-			readOnly,
+			readOnly
 		}}
+		{theme}
 		bind:value
 		on:ready={(editor) => {
 			editor.detail.addAction({
@@ -45,6 +50,7 @@
 	readonly
 </label>
 
+<input type="text" bind:value={theme} />
 
 <style>
 	div#editor {

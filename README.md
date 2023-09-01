@@ -22,7 +22,11 @@ yarn add --save-dev moncao-svelte
 </script>
 
 <div id="editor">
-	<Monaco options={{language: "typescript"}} on:ready={event => console.log(event.detail)} bind:value />
+	<Monaco
+		options={{ language: 'typescript' }}
+		on:ready={(event) => console.log(event.detail)}
+		bind:value
+	/>
 </div>
 
 <textarea bind:value />

@@ -1,29 +1,39 @@
 <script lang="ts">
-	import type monaco from 'monaco-editor';
+	import type Monaco from 'monaco-editor';
 	import { onDestroy, onMount } from 'svelte';
 	import { createEventDispatcher } from 'svelte';
+	import loader from '@monaco-editor/loader';
 
-	// monaco-editor worker importing
-	import TypescriptURL from 'monaco-editor/esm/vs/language/typescript/ts.worker?worker&url';
-	import HTMLURL from 'monaco-editor/esm/vs/language/html/html.worker?worker&url';
-	import CSSURL from 'monaco-editor/esm/vs/language/css/css.worker?worker&url';
-	import JSONURL from 'monaco-editor/esm/vs/language/json/json.worker?worker&url';
-	import EditorURL from 'monaco-editor/esm/vs/editor/editor.worker?worker&url';
+	const themes = Object.fromEntries(
+		Object.entries(import.meta.glob('/node_modules/monaco-themes/themes/*.json')).map(([k, v]) => [
+			k.toLowerCase().split('/').reverse()[0].slice(0, -".json".length),
+			v
+		])
+	);
 
-	let Monaco: typeof monaco;
+	let monaco: typeof Monaco;
 
 	const dispatch = createEventDispatcher<{
-		ready: monaco.editor.IStandaloneCodeEditor;
+		ready: Monaco.editor.IStandaloneCodeEditor;
 	}>();
 
 	let container: HTMLDivElement;
-	export let editor: monaco.editor.IStandaloneCodeEditor | undefined = undefined;
+	export let editor: Monaco.editor.IStandaloneCodeEditor | undefined = undefined;
 	export let value: string;
 
-	export let options: monaco.editor.IStandaloneEditorConstructionOptions = {
+	export let theme: string | undefined = undefined;
+	export let options: Monaco.editor.IStandaloneEditorConstructionOptions = {
 		value,
 		automaticLayout: true
 	};
+
+	$: if (theme && themes[theme]) {
+		const themeName = theme;
+		monaco?.editor.setTheme(themeName)
+		themes[theme]().then((resolvedTheme) => {
+			monaco?.editor.defineTheme(themeName, resolvedTheme as any)
+		});
+	}
 
 	$: editor?.updateOptions(options);
 
@@ -34,37 +44,8 @@
 	}
 
 	onMount(async () => {
-		window.MonacoEnvironment = {
-			getWorker: function (_, label) {
-				const getWorkerModule = (moduleUrl: string, label: string) => {
-					return new Worker(window.MonacoEnvironment!.getWorkerUrl!(moduleUrl, label), {
-						name: label,
-						type: 'module'
-					});
-				};
-				switch (label) {
-					case 'json':
-						return getWorkerModule(JSONURL, label);
-					case 'css':
-					case 'scss':
-					case 'less':
-						return getWorkerModule(CSSURL, label);
-					case 'html':
-					case 'handlebars':
-					case 'razor':
-						return getWorkerModule(HTMLURL, label);
-					case 'typescript':
-					case 'javascript':
-						return getWorkerModule(TypescriptURL, label);
-					default:
-						return getWorkerModule(EditorURL, label);
-				}
-			}
-		};
-
-		Monaco = await import('monaco-editor');
-
-		editor = Monaco.editor.create(container, options);
+		monaco = await loader.init();
+		editor = monaco.editor.create(container, options);
 
 		dispatch('ready', editor);
 
