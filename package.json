@@ -1,7 +1,8 @@
 {
 	"name": "svelte-monaco",
 	"description": "Monaco Editor bindings for Svelte",
-	"version": "0.0.1",
+	"keywords": ["monaco", "svelte"],
+	"version": "0.1.0",
 	"scripts": {
 		"dev": "vite dev",
 		"build": "vite build",
