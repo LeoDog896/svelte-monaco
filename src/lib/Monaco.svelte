@@ -6,7 +6,7 @@
 
 	const themes = Object.fromEntries(
 		Object.entries(import.meta.glob('/node_modules/monaco-themes/themes/*.json')).map(([k, v]) => [
-			k.toLowerCase().split('/').reverse()[0].slice(0, -".json".length),
+			k.toLowerCase().split('/').reverse()[0].slice(0, -'.json'.length),
 			v
 		])
 	);
@@ -29,9 +29,9 @@
 
 	$: if (theme && themes[theme]) {
 		const themeName = theme;
-		monaco?.editor.setTheme(themeName)
+		monaco?.editor.setTheme(themeName);
 		themes[theme]().then((resolvedTheme) => {
-			monaco?.editor.defineTheme(themeName, resolvedTheme as any)
+			monaco?.editor.defineTheme(themeName, resolvedTheme as any);
 		});
 	}
 
