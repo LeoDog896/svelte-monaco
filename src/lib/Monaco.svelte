@@ -29,9 +29,9 @@
 
 	$: if (theme && themes[theme]) {
 		const themeName = theme;
-		monaco?.editor.setTheme(themeName);
 		themes[theme]().then((resolvedTheme) => {
 			monaco?.editor.defineTheme(themeName, resolvedTheme as any);
+			monaco?.editor.setTheme(themeName);
 		});
 	}
 
@@ -48,6 +48,14 @@
 		editor = monaco.editor.create(container, options);
 
 		dispatch('ready', editor);
+
+		if (theme && themes[theme]) {
+			const themeName = theme;
+			themes[theme]().then((resolvedTheme) => {
+				monaco?.editor.defineTheme(themeName, resolvedTheme as any);
+				monaco?.editor.setTheme(themeName);
+			});
+		}
 
 		editor.getModel()!.onDidChangeContent(() => {
 			if (!editor) return;
