@@ -6,7 +6,7 @@
 
 	const themes = Object.fromEntries(
 		Object.entries(import.meta.glob('/node_modules/monaco-themes/themes/*.json')).map(([k, v]) => [
-			k.toLowerCase().split('/').reverse()[0].slice(0, -'.json'.length),
+			k.toLowerCase().split('/').reverse()[0].slice(0, -'.json'.length).replaceAll(" ", "-"),
 			v
 		])
 	);

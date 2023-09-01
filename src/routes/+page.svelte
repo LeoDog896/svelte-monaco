@@ -4,7 +4,7 @@
 
 	let value = 'const x = 5';
 	let readOnly = false;
-	let theme = 'monokai';
+	let theme = 'github-light';
 </script>
 
 <h1>svelte-monaco</h1>
