@@ -16,41 +16,46 @@
 
 <main>
 	<h1>svelte-monaco</h1>
-	<h2>monaco bindings for svelte(&kit)</h2>
+	<h2>monaco bindings for <a href="https://svelte.dev/">Svelte</a> & <a href="https://kit.svelte.dev/">SvelteKit</a></h2>
 
-	<div id="editor">
-		<Monaco
-			options={{
-				language: 'typescript',
-				readOnly
-			}}
-			{theme}
-			bind:value
-			on:ready={(editor) => {
-				editor.detail.addAction({
-					// An unique identifier of the contributed action.
-					id: 'my-unique-id',
+	<p>view on: <a href="https://github.com/LeoDog896/svelte-monaco">GitHub</a> | <a href="https://npmjs.com/package/svelte-monaco">npm</a></p>
 
-					// A label of the action that will be presented to the user.
-					label: 'Custom Action',
+	<div id="playground">
+		<div id="editor">
+			<Monaco
+				options={{
+					language: 'typescript',
+					automaticLayout: true,
+					readOnly
+				}}
+				{theme}
+				bind:value
+				on:ready={(editor) => {
+					editor.detail.addAction({
+						// An unique identifier of the contributed action.
+						id: 'my-unique-id',
 
-					contextMenuGroupId: 'navigation',
+						// A label of the action that will be presented to the user.
+						label: 'Custom Action',
 
-					contextMenuOrder: 1.5,
+						contextMenuGroupId: 'navigation',
 
-					// Method that will be executed when the action is triggered.
-					// @param editor The editor instance is passed in as a convenience
-					run: function (ed) {
-						alert("i'm running => " + ed.getPosition());
-					}
-				});
-			}}
-		/>
+						contextMenuOrder: 1.5,
+
+						// Method that will be executed when the action is triggered.
+						// @param editor The editor instance is passed in as a convenience
+						run: function (ed) {
+							alert("i'm running => " + ed.getPosition());
+						}
+					});
+				}}
+			/>
+		</div>
+		<textarea bind:value />
 	</div>
 
-	<textarea bind:value />
-
-	<hr />
+	<h2>Options</h2>
+	<p><b>NOTE</b>: Options can be any JSON object that is passed straight to monaco. This, for demonstartion, only shows the advanced theme option, and a readonly option.</p>
 
 	<!-- readonly checkbox -->
 	<label>
@@ -70,15 +75,27 @@
 	</ul>
 </main>
 <style>
+	main {
+		margin: 2rem;
+		width: calc(100% - 4rem);
+	}
+	
 	div#editor {
-		width: calc(100% - 2rem - 1px);
-		height: 80%;
+		width: 50%;
+		margin-right: 2rem;
+		height: 100%;
 		border: 1px solid black;
-		max-height: 80%;
 	}
 
-	main {
+	#playground {
+		height: 60vh;
 		width: 100%;
-		height: 100%;
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
+	}
+
+	textarea {
+		width: 50%;
 	}
 </style>
