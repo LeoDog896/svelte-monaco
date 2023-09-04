@@ -27,7 +27,7 @@ pnpm install --save-dev svelte-monaco
 
 <div id="editor">
 	<Monaco
-		options={{ language: 'typescript' }}
+		options={{ language: 'typescript', automaticLayout: true }}
 		theme="monokai"
 		on:ready={(event) => console.log(event.detail)}
 		bind:value
