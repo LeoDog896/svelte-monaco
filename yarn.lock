@@ -157,6 +157,11 @@
   resolved "https://registry.yarnpkg.com/@eslint/js/-/js-8.48.0.tgz#642633964e217905436033a2bd08bf322849b7fb"
   integrity sha512-ZSjtmelB7IJfWD2Fvb7+Z+ChTIKWq6kjda95fLcQKNS5aheVHn4IkfgRQE3sIIzTcSLwLcLZUD9UBt+V7+h+Pw==
 
+"@fontsource-variable/manrope@^5.0.12":
+  version "5.0.12"
+  resolved "https://registry.yarnpkg.com/@fontsource-variable/manrope/-/manrope-5.0.12.tgz#b3a13c8c26e7e16495b57d2ce3b34577a721c980"
+  integrity sha512-5tXuHU2aiTWQd6tu7K3LKu9W/eNQahG2gxskXLdo+1nz1rOoPfhIL/YoVVI4ZehyA8kZFirE8Sn9aeHSl8Xx+Q==
+
 "@humanwhocodes/config-array@^0.11.10":
   version "0.11.11"
   resolved "https://registry.yarnpkg.com/@humanwhocodes/config-array/-/config-array-0.11.11.tgz#88a04c570dbbc7dd943e4712429c3df09bc32844"

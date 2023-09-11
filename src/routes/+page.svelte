@@ -1,10 +1,12 @@
 <script lang="ts">
 	import './style.css';
+	import '@fontsource-variable/manrope';
+
 	import Monaco, { themeNames } from '$lib/index';
 
 	let value = 'const x = 5';
 	let readOnly = false;
-	let theme = 'github-light';
+	let theme = 'vs-dark';
 
 	function selectTheme(themeSelection: string) {
 		return () => {
@@ -77,17 +79,20 @@
 	<p>Theme: <input type="text" bind:value={theme} /></p>
 
 	<p>Available themes:</p>
-	<ul>
-		{#each themeNames as theme}
-			<li><button on:click={selectTheme(theme)}>{theme}</button></li>
+	<div id="themes">
+		{#each themeNames as buttonTheme}
+			<button on:click={selectTheme(buttonTheme)} class:active={theme === buttonTheme}>
+				{buttonTheme}
+			</button>
 		{/each}
-	</ul>
+	</div>
 </main>
 
 <style>
 	main {
 		margin: 2rem;
 		width: calc(100% - 4rem);
+		text-align: center;
 	}
 
 	div#editor {
@@ -103,9 +108,30 @@
 		display: flex;
 		flex-direction: row;
 		justify-content: space-between;
+		text-align: left;
 	}
 
 	textarea {
 		width: 50%;
+		resize: none;
+	}
+
+	#themes {
+		display: flex;
+		flex-direction: row;
+		justify-content: left;
+		flex-wrap: wrap;
+	}
+
+	#themes button {
+		margin: 0.5rem;
+		background: white;
+		border: 1px solid black;
+		padding: 0.5rem;
+	}
+
+	#themes button.active {
+		background: black;
+		color: white;
 	}
 </style>

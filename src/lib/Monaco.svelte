@@ -76,10 +76,10 @@
 	onDestroy(() => editor?.dispose());
 </script>
 
-<div id="monaco-container" bind:this={container} />
+<div class="monaco-container" bind:this={container} />
 
 <style>
-	div#monaco-container {
+	div.monaco-container {
 		width: 100%;
 		height: 100%;
 		padding: 0;
