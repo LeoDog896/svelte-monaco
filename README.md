@@ -22,11 +22,13 @@ pnpm install --save-dev svelte-monaco
 <script lang="ts">
 	import Monaco from 'svelte-monaco';
 
+	// this is fully reactive! setting value to another string will change the editor accordingly
 	let value = 'const x = 5';
 </script>
 
 <div id="editor">
 	<Monaco
+		<!-- options is also reactive -->
 		options={{ language: 'typescript', automaticLayout: true }}
 		theme="monokai"
 		<!-- `event.detail` is the monaco instance -->
