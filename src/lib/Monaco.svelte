@@ -1,10 +1,21 @@
 <script context="module" lang="ts">
-	export const themes = Object.fromEntries(
+	export const exportedThemes = Object.fromEntries(
 		Object.entries(import.meta.glob('/node_modules/monaco-themes/themes/*.json')).map(([k, v]) => [
 			k.toLowerCase().split('/').reverse()[0].slice(0, -'.json'.length).replaceAll(" ", "-"),
 			v
 		])
 	);
+
+	export const nativeThemes = [
+		'vs',
+		'vs-dark',
+		'hc-black'
+	];
+
+	export const themeNames: string[] = [
+		...Object.keys(exportedThemes),
+		...nativeThemes
+	];
 </script>
 
 <script lang="ts">
@@ -29,13 +40,21 @@
 		automaticLayout: true
 	};
 
-	$: if (theme && themes[theme]) {
-		const themeName = theme;
-		themes[theme]().then((resolvedTheme) => {
-			monaco?.editor.defineTheme(themeName, resolvedTheme as any);
-			monaco?.editor.setTheme(themeName);
-		});
+	function refreshTheme() {
+		if (theme) {
+			if (exportedThemes[theme]) {
+				const themeName = theme; // the theme name can change during the async call
+				exportedThemes[theme]().then((resolvedTheme) => {
+					monaco?.editor.defineTheme(themeName, resolvedTheme as any);
+					monaco?.editor.setTheme(themeName);
+				});
+			} else if (nativeThemes.includes(theme)) {
+				monaco?.editor.setTheme(theme);
+			}
+		}
 	}
+
+	$: if (theme) refreshTheme();
 
 	$: editor?.updateOptions(options);
 
@@ -51,13 +70,7 @@
 
 		dispatch('ready', editor);
 
-		if (theme && themes[theme]) {
-			const themeName = theme;
-			themes[theme]().then((resolvedTheme) => {
-				monaco?.editor.defineTheme(themeName, resolvedTheme as any);
-				monaco?.editor.setTheme(themeName);
-			});
-		}
+		refreshTheme();
 
 		editor.getModel()!.onDidChangeContent(() => {
 			if (!editor) return;

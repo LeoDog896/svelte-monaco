@@ -19,33 +19,31 @@ concurrency:
 
 jobs:
   checks:
-    if: github.event_name != 'push'
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
       - uses: actions/setup-node@v2
         with:
-          node-version: '16.x'
-      - name: Test Build
-        run: |
-          yarn install
-          yarn build
-          yarn package
-  gh-release:
+          node-version: '18.x'
+      - name: Install dependencies
+        run: yarn install
+      - name: Build page
+        run: yarn build
+      - name: Upload built project output
+        uses: actions/upload-artifact@v3
+        with:
+            name: build
+            path: build
+  pages:
+    needs: checks
     if: github.event_name != 'pull_request'
     runs-on: ubuntu-latest
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v2
-        with:
-          node-version: '16.x'
-      - name: Install Dependencies
-        run: yarn install
-      - name: Build Project
-        run: yarn build
+      - name: Download Artifacts
+        uses: actions/download-artifact@v3
       - name: Setup Pages
         uses: actions/configure-pages@v2
       - name: Upload artifact

@@ -1,6 +1,6 @@
 <script lang="ts">
 	import './style.css';
-	import Monaco, { themes } from '$lib/index';
+	import Monaco, { themeNames } from '$lib/index';
 
 	let value = 'const x = 5';
 	let readOnly = false;
@@ -69,7 +69,7 @@
 
 	<p>Available themes:</p>
 	<ul>
-		{#each Object.keys(themes) as theme}
+		{#each themeNames as theme}
 			<li><button on:click={selectTheme(theme)}>{theme}</button></li>
 		{/each}
 	</ul>

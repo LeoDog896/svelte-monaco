@@ -20,6 +20,7 @@ pnpm install --save-dev svelte-monaco
 
 ```svelte
 <script lang="ts">
+	// if you want to get themes, feel free to import exportedThemes, nativeThemes, or themeNames.
 	import Monaco from 'svelte-monaco';
 
 	// this is fully reactive! setting value to another string will change the editor accordingly
@@ -27,10 +28,10 @@ pnpm install --save-dev svelte-monaco
 </script>
 
 <div id="editor">
-	<!-- event.detail is the monaco instance. options is also reactive. -->
+	<!-- event.detail is the monaco instance. All options are reactive! -->
 	<Monaco
 		options={{ language: 'typescript', automaticLayout: true }}
-		theme="monokai"
+		theme="vs-dark"
 		on:ready={(event) => console.log(event.detail)}
 		bind:value
 	/>
@@ -40,5 +41,6 @@ pnpm install --save-dev svelte-monaco
 ```
 
 ## Features
-- Reactive everywhere - get every theme from [monaco-themes](https://github.com/brijeshb42/monaco-themes), set the input value, or set the options without hassle.
+- Reactive everywhere - two-way value binding with preserved cursor position, and reactive options.
+- In-built support for [monaco-themes](https://github.com/brijeshb42/monaco-themes)
 - Full access - the moment the editor is finished loading, it is shown to the user. No more waiting for API changes.

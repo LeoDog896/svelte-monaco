@@ -1,4 +1,4 @@
-import Monaco, { themes } from './Monaco.svelte';
+import Monaco, { exportedThemes, nativeThemes, themeNames } from './Monaco.svelte';
 
 export default Monaco;
-export { themes };
+export { exportedThemes, nativeThemes, themeNames };
