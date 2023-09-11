@@ -27,11 +27,10 @@ pnpm install --save-dev svelte-monaco
 </script>
 
 <div id="editor">
+	<!-- event.detail is the monaco instance. options is also reactive. -->
 	<Monaco
-		<!-- options is also reactive -->
 		options={{ language: 'typescript', automaticLayout: true }}
 		theme="monokai"
-		<!-- `event.detail` is the monaco instance -->
 		on:ready={(event) => console.log(event.detail)}
 		bind:value
 	/>
