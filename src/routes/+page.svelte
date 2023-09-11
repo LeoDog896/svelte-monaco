@@ -16,9 +16,15 @@
 
 <main>
 	<h1>svelte-monaco</h1>
-	<h2>monaco bindings for <a href="https://svelte.dev/">Svelte</a> & <a href="https://kit.svelte.dev/">SvelteKit</a></h2>
+	<h2>
+		monaco bindings for <a href="https://svelte.dev/">Svelte</a> &
+		<a href="https://kit.svelte.dev/">SvelteKit</a>
+	</h2>
 
-	<p>view on: <a href="https://github.com/LeoDog896/svelte-monaco">GitHub</a> | <a href="https://npmjs.com/package/svelte-monaco">npm</a></p>
+	<p>
+		view on: <a href="https://github.com/LeoDog896/svelte-monaco">GitHub</a> |
+		<a href="https://npmjs.com/package/svelte-monaco">npm</a>
+	</p>
 
 	<div id="playground">
 		<div id="editor">
@@ -55,7 +61,10 @@
 	</div>
 
 	<h2>Options</h2>
-	<p><b>NOTE</b>: Options can be any JSON object that is passed straight to monaco. This, for demonstartion, only shows the advanced theme option, and a readonly option.</p>
+	<p>
+		<b>NOTE</b>: Options can be any JSON object that is passed straight to monaco. This, for
+		demonstartion, only shows the advanced theme option, and a readonly option.
+	</p>
 
 	<!-- readonly checkbox -->
 	<label>
@@ -65,7 +74,7 @@
 
 	<br />
 
-	<p>Theme: <input type="text" bind:value={theme} /> </p>
+	<p>Theme: <input type="text" bind:value={theme} /></p>
 
 	<p>Available themes:</p>
 	<ul>
@@ -74,12 +83,13 @@
 		{/each}
 	</ul>
 </main>
+
 <style>
 	main {
 		margin: 2rem;
 		width: calc(100% - 4rem);
 	}
-	
+
 	div#editor {
 		width: 50%;
 		margin-right: 2rem;

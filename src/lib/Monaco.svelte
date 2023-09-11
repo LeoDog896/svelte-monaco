@@ -1,21 +1,16 @@
 <script context="module" lang="ts">
 	export const exportedThemes = Object.fromEntries(
 		Object.entries(import.meta.glob('/node_modules/monaco-themes/themes/*.json')).map(([k, v]) => [
-			k.toLowerCase().split('/').reverse()[0].slice(0, -'.json'.length).replaceAll(" ", "-"),
+			k.toLowerCase().split('/').reverse()[0].slice(0, -'.json'.length).replaceAll(' ', '-'),
 			v
 		])
 	);
 
-	export const nativeThemes = [
-		'vs',
-		'vs-dark',
-		'hc-black'
-	];
+	export const nativeThemes = ['vs', 'vs-dark', 'hc-black'];
 
-	export const themeNames: string[] = [
-		...Object.keys(exportedThemes),
-		...nativeThemes
-	];
+	export const themeNames: string[] = [...Object.keys(exportedThemes), ...nativeThemes].sort(
+		(a, b) => a.localeCompare(b)
+	);
 </script>
 
 <script lang="ts">

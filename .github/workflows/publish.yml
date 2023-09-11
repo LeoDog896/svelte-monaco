@@ -32,8 +32,8 @@ jobs:
       - name: Upload built project output
         uses: actions/upload-artifact@v3
         with:
-            name: build
-            path: build
+          name: build
+          path: build
   pages:
     needs: checks
     if: github.event_name != 'pull_request'

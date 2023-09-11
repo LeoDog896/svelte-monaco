@@ -41,6 +41,7 @@ pnpm install --save-dev svelte-monaco
 ```
 
 ## Features
+
 - Reactive everywhere - two-way value binding with preserved cursor position, and reactive options.
 - In-built support for [monaco-themes](https://github.com/brijeshb42/monaco-themes)
 - Full access - the moment the editor is finished loading, it is shown to the user. No more waiting for API changes.
