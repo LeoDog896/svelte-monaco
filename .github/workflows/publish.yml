@@ -22,13 +22,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-node@v2
+      - uses: pnpm/action-setup@v3
         with:
-          node-version: '18.x'
+          version: 8
       - name: Install dependencies
-        run: yarn install
+        run: pnpm install
       - name: Build page
-        run: yarn build
+        run: pnpm run build
       - name: Upload built project output
         uses: actions/upload-artifact@v3
         with:

@@ -41,7 +41,6 @@
 	"svelte": "./dist/index.js",
 	"types": "./dist/index.d.ts",
 	"devDependencies": {
-		"@fontsource-variable/manrope": "^5.0.12",
 		"@sveltejs/adapter-auto": "^2.1.0",
 		"@sveltejs/adapter-static": "^2.0.2",
 		"@sveltejs/kit": "^1.22.3",
