@@ -52,6 +52,8 @@
 	$: if (theme) refreshTheme();
 
 	$: editor?.updateOptions(options);
+	$: model = editor?.getModel();
+	$: (model && options.language) ? monaco.editor.setModelLanguage(model, options.language) : void 0;
 
 	$: if (editor && editor.getValue() != value) {
 		const position = editor.getPosition();

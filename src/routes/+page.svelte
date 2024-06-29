@@ -7,6 +7,7 @@
 	let value = 'const x = 5';
 	let readOnly = false;
 	let theme = 'vs-dark';
+	let language = 'typescript';
 
 	function selectTheme(themeSelection: string) {
 		return () => {
@@ -32,7 +33,7 @@
 		<div id="editor">
 			<Monaco
 				options={{
-					language: 'typescript',
+					language,
 					automaticLayout: true,
 					readOnly
 				}}
@@ -77,6 +78,7 @@
 	<br />
 
 	<p>Theme: <input type="text" bind:value={theme} /></p>
+	<p>Language: <input type="text" bind:value={language} /></p>
 
 	<p>Available themes:</p>
 	<div id="themes">
