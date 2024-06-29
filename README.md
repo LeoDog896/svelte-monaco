@@ -5,14 +5,6 @@
 Reactive two-way, full theme support monaco editor for Svelte(&Kit).
 
 ```sh
-npm install --save-dev svelte-monaco
-```
-
-```sh
-yarn add --save-dev moncao-svelte
-```
-
-```sh
 pnpm install --save-dev svelte-monaco
 ```
 
